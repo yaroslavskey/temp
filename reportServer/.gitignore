@@ -1,0 +1,13 @@
+node_modules
+env
+*~
+*#
+.DS_STORE
+.netbeans
+.idea
+.sonarlint
+.vscode
+.node_history
+.history
+.vscode
+.env
