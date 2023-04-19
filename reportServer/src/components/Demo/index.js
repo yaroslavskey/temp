@@ -2,7 +2,6 @@ const DemoService = require('./service');
 
 async function OriginDestination(req, res) {
     try {
-
         const startDate = new Date(req.body.startDate);
         const endDate = new Date(req.body.endDate);
         const superType = req.body.superType;
@@ -42,7 +41,6 @@ async function Destination(req, res) {
 
 async function Origin(req, res) {
     try {
-
         const startDate = new Date(req.body.startDate);
         const endDate = new Date(req.body.endDate);
         const superType = req.body.superType;

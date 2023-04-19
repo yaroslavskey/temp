@@ -3,10 +3,8 @@ const DemoComponent = require('./index');
 
 const router = Router();
 
-router.get('/1', DemoComponent.OriginDestination);
-router.get('/2', DemoComponent.Destination);
-router.get('/3', DemoComponent.Origin);
-
-
+router.post('/origin_destination', DemoComponent.OriginDestination);
+router.post('/destination', DemoComponent.Destination);
+router.post('/origin', DemoComponent.Origin);
 
 module.exports = router;
