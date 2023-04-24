@@ -9,7 +9,7 @@ async function findOriginDestination(superType, startDate, endDate) {
     WHERE  "superType" = ${superType} AND "departure" >= ${startDate} AND "departure" <= ${endDate}
     GROUP BY "origin", "destination", "superType"
     ORDER BY "_count" DESC
-    LIMIT 10;
+    LIMIT 100;
   `;
 
   return existingObjects;
@@ -22,7 +22,7 @@ async function findOrigin(superType, startDate, endDate) {
     WHERE  "superType" = ${superType} AND "departure" >= ${startDate} AND "departure" <= ${endDate}
     GROUP BY "origin", "superType"
     ORDER BY "_count" DESC
-    LIMIT 10;
+    LIMIT 100;
   `;
 
   return existingObjects;
@@ -35,7 +35,7 @@ async function findDestination(superType, startDate, endDate) {
     WHERE  "superType" = ${superType} AND "departure" >= ${startDate} AND "departure" <= ${endDate}
     GROUP BY "destination", "superType"
     ORDER BY "_count" DESC
-    LIMIT 10;
+    LIMIT 100;
   `;
 
   return existingObjects;

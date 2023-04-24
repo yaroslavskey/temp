@@ -1,170 +1,216 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>REPORTS</title>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      padding: 10px;
-      font-size: 18px;
-    }
+  <head>
+    <title>REPORTS</title>
+    <style>
+      body {
+        height: 100vh;
+        margin: 0;
+        padding: 10px;
+        font-size: 18px;
+      }
 
-    form {
-      width: 300px;
-      padding: 20px;
-      background-color: #d1cccc;
-      border-radius: 10px;
-    }
+      form {
+        width: 300px;
+        height: 340px;
+        padding: 20px;
+        background-color: #d1cccc;
+        border-radius: 10px;
+      }
 
-    label, select, input[type="text"], input[type="date"], input[type="submit"] {
-      margin-bottom: 10px;
-      font-size: 26px;
-    }
+      label,
+      select,
+      input[type="text"],
+      input[type="date"],
+      input[type="submit"] {
+        margin-bottom: 10px;
+        font-size: 26px;
+      }
 
-    input[type="text"], input[type="date"], select[id="supertype"], select[id="reports"] {
-      width: 100%;
-      height: 32px;
-    }
+      input[type="text"],
+      input[type="date"],
+      select[id="supertype"],
+      select[id="reports"] {
+        width: 100%;
+        height: 32px;
+      }
 
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
 
-    table {
-      border: 2px solid black; /* толщина границы таблицы */
-      margin: auto; /* выравнивание таблицы по горизонтали */
-      margin-bottom: 20px; /* отступ внизу от таблицы */
-    }
+      table {
+        border: 2px solid black; /* толщина границы таблицы */
+        margin: auto; /* выравнивание таблицы по горизонтали */
+        margin-bottom: 20px; /* отступ внизу от таблицы */
+      }
 
-    tr:first-child {
-      font-weight: bold; /* жирный текст для первой ячейки */
-      font-size: 26px; /* размер шрифта для первой ячейки */
-      text-align: left; /* выравнивание содержимого по центру */
-    }
-    td:last-child {
-    text-align: left; /* выравнивание содержимого последней колонки по центру */
-    }
+      tr:first-child {
+        font-weight: bold; /* жирный текст для первой ячейки */
+        font-size: 26px; /* размер шрифта для первой ячейки */
+        text-align: left; /* выравнивание содержимого по центру */
+      }
+      td:last-child {
+        text-align: left; /* выравнивание содержимого последней колонки по центру */
+      }
 
-    #response {
-      margin: 20px;
-      white-space: pre-wrap;
-    }
-  </style>
-
-</head>
-<body>
-  <form id="searchForm">
-    <label for="reports">Reports:</label>
-    <select id="reports" name="reports" required>
-      <option value="origin">Origin</option>
-      <option value="destination">Destination</option>
-      <option value="origin_destination">Origin - Distination</option>
-    </select>
-    <label for="supertype">Supertype:</label>
-    <select id="supertype" name="supertype" required>
-      <option value="Entry level jet (VLJ)">Entry level jet (VLJ)</option>
-      <option value="Heavy jet">Heavy jet</option>
-      <option value="Light jet">Light jet</option>
-      <option value="Midsize jet">Midsize jet</option>
-      <option value="Super light jet">Super light jet</option>
-      <option value="Super midsize jet">Super midsize jet</option>
-      <option value="Ultra long range">Ultra long range</option>
-    </select>
-    <br>
-    <label for="startDate">Search start date:</label>
-    <input type="date" id="startDate" name="startDate"  value="2023-04-15" required>
-    <br>
-    <label for="endDate">Search end date:</label>
-    <input type="date" id="endDate" name="endDate" required>
-    <br>
-    <input type="submit" value="Отправить">
-  </form>
-  <p id="response"></p>
+      #response {
+        margin: 10px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="searchForm">
+      <label for="reports">Reports:</label>
+      <select id="reports" name="reports" required>
+        <option value="all reports">All reports</option>
+        <option value="origin">Origin</option>
+        <option value="destination">Destination</option>
+        <option value="origin_destination">Origin - Distination</option>
+      </select>
+      <label for="supertype">Supertype:</label>
+      <select id="supertype" name="supertype" required>
+        <option value="all supertype">All supetype</option>
+        <option value="Entry level jet (VLJ)">Entry level jet (VLJ)</option>
+        <option value="Heavy jet">Heavy jet</option>
+        <option value="Light jet">Light jet</option>
+        <option value="Midsize jet">Midsize jet</option>
+        <option value="Super light jet">Super light jet</option>
+        <option value="Super midsize jet">Super midsize jet</option>
+        <option value="Ultra long range">Ultra long range</option>
+      </select>
+      <br />
+      <label for="startDate">Search start date:</label>
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        value="2023-04-15"
+        required
+      />
+      <br />
+      <label for="endDate">Search end date:</label>
+      <input type="date" id="endDate" name="endDate" required />
+      <br />
+      <input type="submit" value="Отправить" />
+    </form>
+    <p id="response"></p>
 
     <script>
-        document.getElementById("endDate").valueAsDate = new Date();
-        document.getElementById("searchForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            let supertype = document.getElementById("supertype").value;
-            let startDate = document.getElementById("startDate").value;
-            let endDate = document.getElementById("endDate").value;
-            let reports = document.getElementById("reports").value;
-            const myDiv = document.getElementById('response');
+      document.getElementById("endDate").valueAsDate = new Date();
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          let supertype = document.getElementById("supertype").value;
+          let startDate = document.getElementById("startDate").value;
+          let endDate = document.getElementById("endDate").value;
+          let reports = document.getElementById("reports").value;
+          const myDiv = document.getElementById("response");
 
-            const oldHeading = myDiv.querySelector('h2');
-            if (oldHeading) {
-              myDiv.removeChild(oldHeading);
-            }
+          const oldHeading = myDiv.getElementsByTagName("h2");
+          while (oldHeading.length > 0) {
+            myDiv.removeChild(oldHeading[0]);
+          }
 
-            const oldTable = myDiv.querySelector('table');
-            if (oldTable) {
-              myDiv.removeChild(oldTable);
-            }
+          const tables = myDiv.getElementsByTagName("table");
+          while (tables.length > 0) {
+            myDiv.removeChild(tables[0]);
+          }
 
-            const data = {
-                startDate: startDate,
-                endDate: endDate,
-                superType: supertype
-                };
+          const arrSupertype = [];
 
-            let date;
-            
-            const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+          if (supertype == "all supertype") {
+            arrSupertype.push("Entry level jet (VLJ)", "Heavy jet", 'Light jet', 'Midsize jet', 'Super light jet', 'Super midsize jet', 'Ultra long range');
+          } else {
+            arrSupertype.push(supertype);
+          }
+
+          const data = {
+              startDate: startDate,
+              endDate: endDate,
+              superType: supertype,
             };
 
-            fetch(`http://localhost:3000/api/${reports}`, options)
-            .then(response => response.json())
-            .then(data => {
-              date = data.data;
 
-              const table = document.createElement('table');
-              table.style.width = '100%';
+          for (j = 0; j < arrSupertype.length; j++) {
 
-              const headerRow = table.insertRow();
-              // let headers = ['#', 'Origin', 'Destination', 'Supertype', 'Count'];
-              // if (reports == 'origin') {
-              //   headers = ['#', 'Origin', 'Supertype', 'Count'];
-              // } else if (reports == 'destination'){
-              //   headers = ['#', 'Destination', 'Supertype', 'Count'];
-              // }
-              const headers = ['#', 'Origin', 'Destination', 'Supertype', 'Count'];
-              headers.forEach(headerText => {
-                const headerCell = document.createElement('th');
-                headerCell.textContent = headerText;
-                headerRow.appendChild(headerCell);
-              });
+            data.superType = arrSupertype[j];
+          
+            let date;
 
-              date.forEach((item, index)=> {
-              const row = table.insertRow();
-              const { origin, destination, superType, _count } = item;
-              const values = [index + 1, origin, destination, superType, _count];
-              values.forEach(value => {
-                const cell = row.insertCell();
-                cell.textContent = value;
-              });
-            });
-              const myDiv = document.getElementById('response');
-              const heading = document.createElement('h2');
-              heading.textContent = `Report type ${reports}`;
-              myDiv.appendChild(heading);
-              myDiv.appendChild(table);
+            const options = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            };
 
-            })
-            .catch(error => console.error(error));
-          })
-  </script>
-</body>
+            const arrRepoerts = [];
+
+            if (reports == "all reports") {
+              arrRepoerts.push("origin", "destination", "origin_destination");
+            } else {
+              arrRepoerts.push(reports);
+            }
+
+            for (i = 0; i < arrRepoerts.length; i++) {
+              fetch(`http://localhost:3000/api/${arrRepoerts[i]}`, options)
+                .then((response) => response.json())
+                .then((data) => {
+                  date = data.data;
+
+                  const table = document.createElement("table");
+                  table.style.width = "100%";
+
+                  const headerRow = table.insertRow();
+                  const headers = [
+                    "#",
+                    "Origin",
+                    "Destination",
+                    "Supertype",
+                    "Count",
+                  ];
+                  headers.forEach((headerText) => {
+                    const headerCell = document.createElement("th");
+                    headerCell.textContent = headerText;
+                    headerRow.appendChild(headerCell);
+                  });
+
+                  date.forEach((item, index) => {
+                    const row = table.insertRow();
+                    const { origin, destination, superType, _count } = item;
+                    const values = [
+                      index + 1,
+                      origin,
+                      destination,
+                      superType,
+                      _count,
+                    ];
+                    values.forEach((value) => {
+                      const cell = row.insertCell();
+                      cell.textContent = value;
+                    });
+                  });
+                  const myDiv = document.getElementById("response");
+                  const heading = document.createElement("h2");
+                  heading.textContent = `Report type ${reports} by supertype ${supertype}`;
+                  myDiv.appendChild(heading);
+                  myDiv.appendChild(table);
+                })
+                .catch((error) => console.error(error));
+            }
+          }
+        });
+    </script>
+  </body>
 </html>
