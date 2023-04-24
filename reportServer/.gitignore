@@ -1,5 +1,5 @@
 node_modules
-env
+#env
 *~
 *#
 .DS_STORE
@@ -10,4 +10,4 @@ env
 .node_history
 .history
 .vscode
-.env
+#.env
